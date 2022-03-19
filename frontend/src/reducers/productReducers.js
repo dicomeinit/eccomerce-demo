@@ -14,7 +14,7 @@ export const productListReducers = (state = { products: [] }, action) => {
     case PRODUCT_LIST_SUCCESS:
       return { loading: false, products: action.payload };
     case PRODUCT_LIST_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, error: action.error };
     default:
       return state;
   }
@@ -30,7 +30,7 @@ export const productDetailsReducers = (
     case PRODUCT_DETAILS_SUCCESS:
       return { loading: false, product: action.payload };
     case PRODUCT_DETAILS_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, error: action.error };
     default:
       return state;
   }
