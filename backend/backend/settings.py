@@ -1,3 +1,5 @@
+import os
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,7 +41,6 @@ REST_FRAMEWORK = {
     )
 }
 
-from datetime import timedelta
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
@@ -73,9 +74,10 @@ SIMPLE_JWT = {
 }
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
