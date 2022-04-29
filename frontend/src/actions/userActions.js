@@ -5,7 +5,6 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGOUT,
 } from "../constants/userConstants";
-import { PRODUCT_DETAILS_FAIL } from "../constants/productConstants";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -20,7 +19,8 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `/api/user/login/`,
+
+      `http://127.0.0.1:8000/api/users/login/`,
       { username: email, password: password },
       config
     );
