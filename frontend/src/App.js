@@ -9,7 +9,6 @@ import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
 
-
 function App() {
   return (
     <Router>
