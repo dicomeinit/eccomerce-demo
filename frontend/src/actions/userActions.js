@@ -14,7 +14,8 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
-  USER_UPDATE_PROFILE_RESET} from "../constants/userConstants";
+  USER_UPDATE_PROFILE_RESET,
+} from "../constants/userConstants";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -71,7 +72,7 @@ export const register = (name, email, password) => async (dispatch) => {
 
     const { data } = await axios.post(
       `http://127.0.0.1:8000/api/users/register/`,
-      { 'name': name, 'email': email, 'password': password },
+      { name: name, email: email, password: password },
       config
     );
 
@@ -86,7 +87,6 @@ export const register = (name, email, password) => async (dispatch) => {
     });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
-
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -98,7 +98,6 @@ export const register = (name, email, password) => async (dispatch) => {
   }
 };
 
-
 export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -106,13 +105,13 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     });
 
     const {
-      userLogin: {userInfo},
-    } = getState()
+      userLogin: { userInfo },
+    } = getState();
 
     const config = {
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
@@ -125,8 +124,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       type: USER_DETAILS_SUCCESS,
       payload: data,
     });
-
-
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
@@ -145,13 +142,13 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     });
 
     const {
-      userLogin: {userInfo},
-    } = getState()
+      userLogin: { userInfo },
+    } = getState();
 
     const config = {
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
@@ -172,8 +169,6 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
-
-
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
