@@ -55,7 +55,7 @@ export const cartReducers = (
             return {
                 ...state,
                 cartItems: []
-            }
+            };
         default:
             return state;
     }

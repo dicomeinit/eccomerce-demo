@@ -8,22 +8,20 @@ import {
     Card,
     ListGroupItem
 } from 'react-bootstrap';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
-import { createOrder } from "../actions/orderAction";
-import { ORDER_CREATE_RESET} from "../constants/OrderConstants";
+import { createOrder } from '../actions/orderAction';
+import { ORDER_CREATE_RESET } from '../constants/OrderConstants';
 
 function PlaceOrderScreen() {
-
     let navigate = useNavigate();
 
+    const orderCreate = useSelector((state) => state.orderCreate);
+    const { order, error, success } = orderCreate;
 
-    const orderCreate = useSelector(state => state.orderCreate);
-    const {order, error, success} = orderCreate
-
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
 
     cart.itemsPrice = cart.cartItems
@@ -38,27 +36,29 @@ function PlaceOrderScreen() {
         Number(cart.taxPrice)
     ).toFixed(2);
 
-    if(!cart.paymentMethod){
-        navigate('/payment')
+    if (!cart.paymentMethod) {
+        navigate('/payment');
     }
 
     useEffect(() => {
-        if(success){
-            navigate(`/order/${order._id}`)
-            dispatch({type: ORDER_CREATE_RESET})
+        if (success) {
+            navigate(`/order/${order._id}`);
+            dispatch({ type: ORDER_CREATE_RESET });
         }
-    }, [success, navigate])
+    }, [success, navigate]);
 
     const placeOrder = () => {
-        dispatch(createOrder({
-            orderItems:cart.cartItems,
-            shippingAddress:cart.shippingAddress,
-            paymentMethod:cart.paymentMethod,
-            itemsPrice:cart.itemsPrice,
-            shippingPrice:cart.shippingPrice,
-            taxPrice:cart.taxPrice,
-            totalPrice:cart.totalPrice
-        }))
+        dispatch(
+            createOrder({
+                orderItems: cart.cartItems,
+                shippingAddress: cart.shippingAddress,
+                paymentMethod: cart.paymentMethod,
+                itemsPrice: cart.itemsPrice,
+                shippingPrice: cart.shippingPrice,
+                taxPrice: cart.taxPrice,
+                totalPrice: cart.totalPrice
+            })
+        );
         console.log('Place order');
     };
     return (
@@ -173,7 +173,9 @@ function PlaceOrderScreen() {
                             </ListGroup.Item>
 
                             <ListGroup.Item>
-                                {error && <Message variant='danger'>{error}</Message> }
+                                {error && (
+                                    <Message variant="danger">{error}</Message>
+                                )}
                             </ListGroup.Item>
 
                             <ListGroup>
