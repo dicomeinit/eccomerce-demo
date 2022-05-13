@@ -6,7 +6,6 @@ import {
     ListGroup,
     Image,
     Card,
-    ListGroupItem
 } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,6 +21,7 @@ function PlaceOrderScreen() {
     const { order, error, success } = orderCreate;
 
     const dispatch = useDispatch();
+
     const cart = useSelector((state) => state.cart);
 
     cart.itemsPrice = cart.cartItems
@@ -60,6 +60,7 @@ function PlaceOrderScreen() {
             })
         );
         console.log('Place order');
+        console.log(placeOrder);
     };
     return (
         <div>
