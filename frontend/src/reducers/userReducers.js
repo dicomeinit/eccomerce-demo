@@ -16,7 +16,7 @@ import {
     USER_UPDATE_PROFILE_RESET
 } from '../constants/userConstants';
 
-export const userLoginReducers = (state = {}, action) => {
+export const userLoginReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_LOGIN_REQUEST:
             return { loading: true };
@@ -32,7 +32,7 @@ export const userLoginReducers = (state = {}, action) => {
     }
 };
 
-export const userRegisterReducers = (state = {}, action) => {
+export const userRegisterReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_REGISTER_REQUEST:
             return { loading: true };
