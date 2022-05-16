@@ -3,11 +3,9 @@ import {
     ORDER_CREATE_REQUEST,
     ORDER_CREATE_SUCCESS,
     ORDER_CREATE_FAIL,
-
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
-
     ORDER_PAY_REQUEST,
     ORDER_PAY_SUCCESS,
     ORDER_PAY_FAIL,
@@ -50,7 +48,6 @@ export const createOrder = (order) => async (dispatch, getState) => {
         });
 
         localStorage.removeItem('cartItems');
-
     } catch (error) {
         dispatch({
             type: ORDER_CREATE_FAIL,
@@ -88,8 +85,6 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
             type: ORDER_DETAILS_SUCCESS,
             payload: data
         });
-
-
     } catch (error) {
         dispatch({
             type: ORDER_DETAILS_FAIL,
@@ -100,7 +95,6 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         });
     }
 };
-
 
 export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
     try {
@@ -129,8 +123,6 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
             type: ORDER_PAY_SUCCESS,
             payload: data
         });
-
-
     } catch (error) {
         dispatch({
             type: ORDER_PAY_FAIL,
