@@ -23,7 +23,10 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
         }
     });
     console.log('cart_items from state', JSON.stringify(state.cart.cartItems));
-    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+    localStorage.setItem(
+        'cartItems',
+        JSON.stringify(getState().cart.cartItems)
+    );
     // localStorage.setItem('cartItems', JSON.stringify(state.cart.cartItems));
 };
 
