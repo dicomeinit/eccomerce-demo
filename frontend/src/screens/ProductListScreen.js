@@ -4,11 +4,9 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import Paginate from "../components/Paginate";
 import { listProducts, deleteProduct, createProduct } from "../actions/productActions";
 import {useNavigate} from "react-router-dom";
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
-import {useLocation} from "react-router-dom";
 
 function ProductListScreen() {
 
@@ -17,7 +15,7 @@ function ProductListScreen() {
     let navigate = useNavigate();
 
     const productList = useSelector(state => state.productList);
-    const { loading, error, products, pages, page } = productList;
+    const { loading, error, products } = productList;
 
     const productDelete = useSelector(state => state.productDelete);
     const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete;
@@ -28,8 +26,6 @@ function ProductListScreen() {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const location = useLocation()
-    let keyword = location.search
 
     useEffect(() => {
         dispatch({ type: PRODUCT_CREATE_RESET })
@@ -41,10 +37,10 @@ function ProductListScreen() {
         if (successCreate) {
             navigate(`/admin/product/${createdProduct._id}/edit`)
         } else {
-            dispatch(listProducts(keyword))
+            dispatch(listProducts())
         }
 
-    }, [dispatch, navigate, userInfo, successDelete, successCreate, createdProduct, keyword])
+    }, [dispatch, navigate, userInfo, successDelete, successCreate, createdProduct])
 
     const deleteHandler = (id) => {
 
@@ -81,46 +77,42 @@ function ProductListScreen() {
                 : error
                     ? ( <Message variant='danger'>{error}</Message>)
                     : (
-                        <div>
-                            <Table striped bordered hover responsive className='table-sm'>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>NAME</th>
-                                        <th>PRICE</th>
-                                        <th>CATEGORY</th>
-                                        <th>BRAND</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
+                        <Table striped bordered hover responsive className='table-sm'>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NAME</th>
+                                    <th>PRICE</th>
+                                    <th>CATEGORY</th>
+                                    <th>BRAND</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
 
-                                <tbody>
-                                    {products.map(product => (
-                                        <tr key={product._id}>
-                                            <td>{product._id}</td>
-                                            <td>{product.name}</td>
-                                            <td>${product.price}</td>
-                                            <td>{product.category}</td>
-                                            <td>{product.brand}</td>
+                            <tbody>
+                                {products.map(product => (
+                                    <tr key={product._id}>
+                                        <td>{product._id}</td>
+                                        <td>{product.name}</td>
+                                        <td>${product.price}</td>
+                                        <td>{product.category}</td>
+                                        <td>{product.brand}</td>
 
-                                            <td>
-                                                <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                                                    <Button variant='light' className='btn-sm'>
-                                                        <i className='fas fa-edit'></i>
-                                                    </Button>
-                                                </LinkContainer>
-
-                                                <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
-                                                    <i className='fas fa-trash'></i>
+                                        <td>
+                                            <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                                                <Button variant='light' className='btn-sm'>
+                                                    <i className='fas fa-edit'></i>
                                                 </Button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
-                            <Paginate pages={pages} page={page} isAdmin={true} />
+                                            </LinkContainer>
 
-                        </div>
+                                            <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
+                                                <i className='fas fa-trash'></i>
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
                     )}
         </div>
     )
