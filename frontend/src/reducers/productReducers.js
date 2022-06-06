@@ -22,12 +22,17 @@ import {
     PRODUCT_CREATE_REVIEW_RESET
 } from '../constants/productConstants';
 
-export const productListReducers = (state = { products: [] }, action) => {
+export const productListReducer = (state = { products: [] }, action) => {
     switch (action.type) {
         case PRODUCT_LIST_REQUEST:
             return { loading: false, products: [] };
         case PRODUCT_LIST_SUCCESS:
-            return { loading: false, products: action.payload };
+            return {
+                loading: false,
+                products: action.payload.products,
+                page: action.payload.page,
+                pages: action.payload.pages
+            }
         case PRODUCT_LIST_FAIL:
             return { loading: false, error: action.error };
         default:
@@ -35,7 +40,7 @@ export const productListReducers = (state = { products: [] }, action) => {
     }
 };
 
-export const productDetailsReducers = (
+export const productDetailsReducer = (
     state = { product: { reviews: [] } },
     action
 ) => {
