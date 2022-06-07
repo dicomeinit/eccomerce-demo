@@ -34,22 +34,22 @@ function ProductScreen() {
     const userLogin = useSelector((state) => state.userLogin);
     const { userInfo } = userLogin;
 
-    // const productReviewCreate = useSelector(state => state.productReviewCreate)
-    // const {
-    //     loading: loadingProductReview,
-    //     error: errorProductReview,
-    //     success: successProductReview,
-    // } = productReviewCreate
+    const productReviewCreate = useSelector(state => state.productReviewCreate)
+    const {
+        loading: loadingProductReview,
+        error: errorProductReview,
+        success: successProductReview,
+    } = productReviewCreate
 
     useEffect(() => {
-        // if (successProductReview) {
-        //     setRating(0)
-        //     setComment('')
-        //     dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
-        // }
+        if (successProductReview) {
+            setRating(0)
+            setComment('')
+            dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
+        }
 
         dispatch(listProductDetails(id));
-    }, [dispatch, id, qty]);
+    }, [dispatch, id, successProductReview]);
 
     const addToCartHandler = () => {
         console.log('Add to cart:', id);
@@ -178,9 +178,9 @@ function ProductScreen() {
                     <Col md={6}>
                         <h4>Reviews</h4>
 
-                        {/*{loadingProductReview && <Loader />}*/}
-                        {/*{successProductReview && <Message variant='success'>Review Submitted</Message>}*/}
-                        {/*{errorProductReview && <Message variant='danger'>{errorProductReview}</Message>}*/}
+                        {loadingProductReview && <Loader />}
+                        {successProductReview && <Message variant='success'>Review Submitted</Message>}
+                        {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>}
 
                         {product.reviews.length === 0 && <Message variant='info'>No reviews</Message> }
 
@@ -226,7 +226,7 @@ function ProductScreen() {
                                         </Form.Group>
 
                                         <Button
-                                            // disabled={loadingProductReview}
+                                            disabled={loadingProductReview}
                                             type='submit'
                                             variant='primary'
                                         >
