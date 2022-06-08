@@ -84,7 +84,7 @@ export const productCreateReducer = (
         case PRODUCT_CREATE_REQUEST:
             return { loading: true };
         case PRODUCT_CREATE_SUCCESS:
-            return { loading: false, success: true, product:action.payload };
+            return { loading: false, success: true, product: action.payload };
         case PRODUCT_CREATE_FAIL:
             return { loading: false, error: action.error };
         case PRODUCT_CREATE_RESET:
@@ -104,7 +104,7 @@ export const productUpdateReducer = (
         case PRODUCT_UPDATE_REQUEST:
             return { loading: true };
         case PRODUCT_UPDATE_SUCCESS:
-            return { loading: false, success: true, product:action.payload };
+            return { loading: false, success: true, product: action.payload };
         case PRODUCT_UPDATE_FAIL:
             return { loading: false, error: action.error };
         case PRODUCT_UPDATE_RESET:
@@ -116,24 +116,24 @@ export const productUpdateReducer = (
 };
 
 
-export const productCreateReviewReducer = (
-    state = { },
-    action
-) => {
+export const productReviewCreateReducer = (state = {}, action) => {
     switch (action.type) {
         case PRODUCT_CREATE_REVIEW_REQUEST:
-            return { loading: true };
+            return { loading: true }
+
         case PRODUCT_CREATE_REVIEW_SUCCESS:
-            return { loading: false, success: true, };
+            return { loading: false, success: true, }
+
         case PRODUCT_CREATE_REVIEW_FAIL:
-            return { loading: false, error: action.error };
+            return { loading: false, error: action.payload }
+
         case PRODUCT_CREATE_REVIEW_RESET:
-            return { };
+            return {}
 
         default:
-            return state;
+            return state
     }
-};
+}
 
 
 export const productTopRatedReducer = (
