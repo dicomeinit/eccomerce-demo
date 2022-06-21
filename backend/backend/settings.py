@@ -2,16 +2,19 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-import os
 
+
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=ya&odu2h__na4ra$y^tu1=iqc%08gy7w^$-(n8*t(0oz^=zr*'
+SECRET_KEY = os.getenv('APP_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -115,8 +118,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.getenv("APP_DB_ENGINE"),
+        'NAME': os.getenv("APP_DB_NAME"),
+        'USER': os.getenv("APP_DB_USER"),
+        'PASSWORD': os.getenv("APP_DB_PASSWORD"),
+        'HOST': os.getenv("APP_DB_HOST"),
+        'PORT': os.getenv("APP_DB_PORT")
     }
 }
 
