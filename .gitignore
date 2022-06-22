@@ -23,3 +23,5 @@ images/
 db.sqlite3
 .DS_Store
 
+bucket_policy.txt
+
