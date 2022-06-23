@@ -19,7 +19,7 @@ SECRET_KEY = os.getenv('APP_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'https://proshop-di.herokuapp.com/']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'proshop-di.herokuapp.com', "dashboard.heroku.com"]
 
 
 # Application definition
@@ -189,6 +189,8 @@ if DEBUG:
     CORS_ALLOWED_ORIGINS = [
         'http://localhost:3000',
         'http://127.0.0.1:3000',
+        'https://proshop-di.herokuapp.com',
+        "https://dashboard.heroku.com"
     ]
 
 AWS_QUERYSTRING_AUTH = False
