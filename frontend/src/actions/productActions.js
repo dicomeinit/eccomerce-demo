@@ -30,7 +30,7 @@ export const listProducts =
             dispatch({ type: PRODUCT_LIST_REQUEST });
 
             const { data } = await axios.get(
-                `http://127.0.0.1:8000/api/products${keyword}`
+                `/api/products${keyword}`
             );
 
             dispatch({
@@ -53,7 +53,7 @@ export const listProductDetails = (id) => async (dispatch) => {
         dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
         const { data } = await axios.get(
-            `http://127.0.0.1:8000/api/products/${id}/`
+            `/api/products/${id}/`
         );
 
         dispatch({
@@ -90,7 +90,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
         };
 
         const { data } = await axios.delete(
-            `http://127.0.0.1:8000/api/products/delete/${id}`,
+            `/api/products/delete/${id}`,
             config
         );
 
@@ -126,7 +126,7 @@ export const createProduct = () => async (dispatch, getState) => {
         };
 
         const { data } = await axios.post(
-            `http://127.0.0.1:8000/api/products/create/`,
+            `/api/products/create/`,
             {},
             config
         );
@@ -164,7 +164,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
         };
 
         const { data } = await axios.put(
-            `http://127.0.0.1:8000/api/products/update/${product._id}/`,
+            `/api/products/update/${product._id}/`,
             product,
             config
         );
@@ -207,7 +207,7 @@ export const createProductReview = (id, review) => async (dispatch, getState) =>
         };
 
         const { data } = await axios.post(
-            `http://127.0.0.1:8000/api/products/${id}/reviews/`,
+            `/api/products/${id}/reviews/`,
             review,
             config
         );
@@ -236,7 +236,7 @@ export const listTopProducts =
             dispatch({ type: PRODUCT_TOP_REQUEST });
 
             const { data } = await axios.get(
-                `http://127.0.0.1:8000/api/products/top/`
+                `/api/products/top/`
             );
 
             dispatch({

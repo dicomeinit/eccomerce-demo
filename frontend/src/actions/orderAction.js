@@ -9,7 +9,6 @@ import {
     ORDER_PAY_REQUEST,
     ORDER_PAY_SUCCESS,
     ORDER_PAY_FAIL,
-    ORDER_PAY_RESET,
     ORDER_LIST_MY_REQUEST,
     ORDER_LIST_MY_SUCCESS,
     ORDER_LIST_MY_FAIL,
@@ -43,7 +42,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         };
 
         const { data } = await axios.post(
-            `http://127.0.0.1:8000/api/orders/add/`,
+            `/api/orders/add/`,
             order,
             config
         );
@@ -88,7 +87,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         };
 
         const { data } = await axios.get(
-            `http://127.0.0.1:8000/api/orders/${id}/`,
+            `/api/orders/${id}/`,
             config
         );
 
@@ -125,7 +124,7 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
         };
 
         const { data } = await axios.put(
-            `http://127.0.0.1:8000/api/orders/${id}/pay/`,
+            `/api/orders/${id}/pay/`,
             paymentResult,
             config
         );
@@ -164,7 +163,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
         };
 
         const { data } = await axios.get(
-            `http://127.0.0.1:8000/api/orders/myorders/`,
+            `/api/orders/myorders/`,
             config
         );
 
@@ -202,7 +201,7 @@ export const listOrders = () => async (dispatch, getState) => {
         };
 
         const { data } = await axios.get(
-            `http://127.0.0.1:8000/api/orders/`,
+            `/api/orders/`,
             config
         );
 
@@ -240,7 +239,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
         };
 
         const { data } = await axios.put(
-            `http://127.0.0.1:8000/api/orders/${order._id}/deliver/`,
+            `/api/orders/${order._id}/deliver/`,
             {},
             config
         );
