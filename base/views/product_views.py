@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 
 from rest_framework.decorators import api_view, permission_classes
@@ -15,12 +16,12 @@ from rest_framework import status
 @api_view(['GET'])
 def getProducts(request):
     query = request.query_params.get('keyword')
-    print('query:', query)
 
     if query is None:
         query = ''
 
-    products = Product.objects.filter(name__icontains=query)
+    products = Product.objects.filter(
+        name__icontains=query).order_by('-createdAt')
 
     page = request.query_params.get('page')
     paginator = Paginator(products, 5)
@@ -46,6 +47,7 @@ def getTopProducts(requests):
     products = Product.objects.filter(rating__gte=4).order_by('-rating')[0:5]
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getProduct(request, pk):
