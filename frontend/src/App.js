@@ -42,10 +42,10 @@ function App() {
                             path="/product/:id"
                             element={<ProductScreen />}
                         />
-                        {/*<Route path="cart" element={<CartScreen />}>*/}
-                        {/*    <Route path="/cart/:id" element={<CartScreen />} />*/}
-                        {/*</Route>*/}
-                        <Route path='/cart/:id?' component={CartScreen} />
+                        <Route path="cart" element={<CartScreen />}>
+                            <Route path="/cart/:id" element={<CartScreen />} />
+                        </Route>
+                        {/*<Route path='/cart/:id?' component={CartScreen} />*/}
 
                         <Route path="/admin/userlist" element={<UserListScreen />} />
                         <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />

@@ -1,50 +1,45 @@
 import React, { useEffect } from 'react';
 import {
-    Link,
+    Link, useLocation,
     useNavigate,
     useParams,
     useSearchParams
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    Row,
-    Col,
-    Image,
-    Form,
-    Button,
-    Card,
-    ListGroup
-} from 'react-bootstrap';
+import { Row, Col, Image, Form, Button, Card, ListGroup } from 'react-bootstrap';
 import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartAction';
 
 function CartScreen() {
     const { id } = useParams();
+    const productId = id
     let navigate = useNavigate();
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const qty = Number(searchParams.get('qty'));
+    const location = useLocation()
+    const qty = location.state ? Number(location.state) : 1
+
+    // const [searchParams, setSearchParams] = useSearchParams();
+    // const qty = Number(searchParams.get('qty'));
 
     const dispatch = useDispatch();
-    console.log('qty.id => ', id);
+    console.log('qty.id => ', productId);
 
-    const cart = useSelector((state) => state.cart);
+    const cart = useSelector(state => state.cart);
     const { cartItems } = cart;
-    console.log('cartItems: ', cartItems);
+
 
     useEffect(() => {
         if (id) {
-            dispatch(addToCart(id, qty));
+            dispatch(addToCart(productId, qty));
         }
-    }, [dispatch, id, qty]);
+    }, [dispatch, productId, qty]);
 
-    const removeFromCartHandler = (id) => {
-        console.log('remove:', id);
-        dispatch(removeFromCart(id));
+    const removeFromCartHandler = (productId) => {
+        console.log('remove:', productId);
+        dispatch(removeFromCart(productId));
     };
 
     const checkoutHandler = () => {
-        // navigate("/login?redirect=shipping");
         navigate('/shipping');
     };
 

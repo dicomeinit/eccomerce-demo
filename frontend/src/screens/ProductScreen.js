@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import {
-    Row,
-    Col,
-    Image,
-    ListGroup,
-    Button,
-    Card,
-    Form
-} from 'react-bootstrap';
+import { Row, Col, Image, ListGroup, Button, Card, Form } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -19,7 +11,7 @@ import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
 function ProductScreen() {
 
-    const { id } = useParams();
+    const { id } = useParams()
     let navigate = useNavigate();
 
     const [qty, setQty] = useState(1);
@@ -28,10 +20,10 @@ function ProductScreen() {
 
     const dispatch = useDispatch();
 
-    const productDetails = useSelector((state) => state.productDetails);
+    const productDetails = useSelector(state => state.productDetails);
     const { loading, error, product } = productDetails;
 
-    const userLogin = useSelector((state) => state.userLogin);
+    const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
 
     const productReviewCreate = useSelector(state => state.productReviewCreate)
@@ -39,7 +31,7 @@ function ProductScreen() {
         loading: loadingProductReview,
         error: errorProductReview,
         success: successProductReview,
-    } = productReviewCreate
+    } = productReviewCreate;
 
     useEffect(() => {
         if (successProductReview) {
@@ -51,10 +43,14 @@ function ProductScreen() {
         dispatch(listProductDetails(id));
     }, [dispatch, id, successProductReview]);
 
+    // const addToCartHandler = () => {
+    //     console.log('Add to cart:', productId.id);
+    //     navigate(`/cart/${productId.id}?qty=${qty}`);
+    // };
+
     const addToCartHandler = () => {
-        console.log('Add to cart:', id);
-        navigate(`/cart/${id}?qty=${qty}`);
-    };
+        navigate(`/cart/${id}`, {state: qty})
+    }
 
     const submitHandler = (e) => {
         e.preventDefault()
